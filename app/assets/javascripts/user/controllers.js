@@ -13,6 +13,9 @@ define(["angular"], function(angular) {
       });
     };
   };
+
+
+
   LoginCtrl.$inject = ["$scope", "$location", "userService"];
 
   return {
