@@ -21,6 +21,9 @@ define(["angular"], function(angular) {
       $scope.user = user;
     }, true);
 
+
+
+
     $scope.logout = function() {
       userService.logout();
       $scope.user = undefined;

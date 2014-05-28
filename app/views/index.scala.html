@@ -10,21 +10,29 @@
     <script>
      @Html(org.webjars.RequireJS.getSetupJavaScript(routes.CdnWebJarAssets.at("").url, current.configuration.getString("contentUrl").orNull))
     </script>
+      @*the folder contains the main.js is the base folder, baseUrl for requirejs*@
     <script data-main="@routes.Assets.at(helper.mainScriptSrc(scriptName = "main"))" src="@CdnWebJarAssets.getUrl(CdnWebJarAssets.locate("require.js"))"></script>
+
   </head>
   <body>
     @*-- Header -- *@
     <header class="navbar navbar-inverse navbar-fixed-top basics-nav" data-ng-controller="HeaderCtrl"
         data-ng-cloak>
       <div class="container" data-ng-switch="!!user" data-ng-cloak>
-        <a href="#/" class="navbar-brand">Play-Angular Seed</a>
+       @* <a href="#/" class="navbar-brand">Management Application</a>*@
+
+
         <div data-ng-switch-when="true">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/profiles">Profiles</a></li>
+            <li><a ng-click="getProfilesList()">Upload File</a></li>
+            <li><a href="#/createProfile">Create Student</a></li>
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span> {{user.firstName}} {{user.lastName}}
+                <span class="glyphicon glyphicon-user"></span> {{user.username}}
                 <b class="caret"></b>
               </a>
+
               <ul class="dropdown-menu">
                 <li><a href="#/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                 <li>
@@ -39,7 +47,7 @@
         <div data-ng-switch-when="false">
 
           <ul class="nav navbar-nav pull-right">
-            <li><a href="#/createProfile">Create Student</a></li>
+
             <li><a href="#/login">Login</a></li>
           </ul>
         </div>

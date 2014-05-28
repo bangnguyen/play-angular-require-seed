@@ -4,7 +4,7 @@
   // -- DEV RequireJS config --
   requirejs.config({
     // Packages = top-level folders; loads a contained file named "main.js"
-    packages: ["common", "home", "user", "dashboard","profile"],
+    packages: ["common", "home", "user", "dashboard","profile","utils"],
     shim: {
       "jsRoutes" : {
         deps : [],
@@ -24,6 +24,9 @@
   // Load the app. This is kept minimal so it doesn't need much updating.
   require(["angular", "angular-cookies", "angular-route", "jquery", "bootstrap", "./app"],
     function(angular) {
+     //this function is called when angular, angular-cookies, angular-route are all loaded
+     //if angular, angular-cookies call define, this functions is not fired until
+     // depend
       angular.bootstrap(document, ["app"]);
     }
   );

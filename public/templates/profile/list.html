@@ -1,0 +1,20 @@
+<br/><br/><br/><br/>
+<div id="profiles-list">
+
+    <p><strong>Page:</strong> {{tableParams.page()}}</p>
+    <p><strong>Count per page:</strong> {{tableParams.count()}}</p>
+    <table ng-table="tableParams" class="table">
+        <tr id="tr{{item.id}}" ng-repeat="item in $data">
+            <td class="rowTd"  data-title="'FullName'">{{item.fullName}}</td>
+            <td class="rowTd"  data-title="'Email'">{{item.email}}</td>
+            <td class="rowTd" >
+            <input type=button id="editRowBtn{{item.id}}" value="edit" ng-click="setEditId(item.id)"></td>
+        </tr>
+        <tr ng-show="editId===item.id" ng-if="editId===item.id">
+            <td colspan="3" ng-include  src="'/assets/templates/profile/editRow.html'"></td>
+        </tr>
+    </table>
+
+
+
+</div>

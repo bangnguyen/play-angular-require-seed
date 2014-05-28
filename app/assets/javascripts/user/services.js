@@ -5,10 +5,10 @@ define(["angular", "common"], function(angular) {
   "use strict";
 
   var mod = angular.module("user.services", ["common"]);
-  mod.factory("userService", ["$http", "$q", "playRoutes", function($http, $q, playRoutes) {
+  mod.factory("userService", ["$http", "$q", "playRoutes","$cookieStore",function($http, $q, playRoutes,$cookieStore) {
     var user, token;
     return {
-      loginUser : function(credentials) {
+     /* loginUser : function(credentials) {
         return playRoutes.controllers.Application.login().post(credentials).then(function(response) {
           // return promise so we can chain easily
           token = response.data.token;
@@ -19,12 +19,28 @@ define(["angular", "common"], function(angular) {
           user.email = credentials.email;
           return user;
         });
-      },
+      }*/
+    loginUser : function(credentials) {
+        return playRoutes.controllers.Application.login().post(credentials).then(function(response) {
+            // return promise so we can chain easily
+            // in a real app we could use the token to fetch the user data
+            user = response.data
+            return user
+        })
+    }
+        ,
       logout : function() {
       // Logout on server in a real app
+      $cookieStore.remove('username');
       user = undefined;
       },
       getUser : function() {
+        console.log("getUser "+ $cookieStore.get('username'))
+        var username = $cookieStore.get('username')
+        if(username!=undefined)
+            user = {username : username}
+        else
+           user = undefined
         return user;
       }
     };

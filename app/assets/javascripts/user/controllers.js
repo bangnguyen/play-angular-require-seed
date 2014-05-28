@@ -4,11 +4,13 @@
 define(["angular"], function(angular) {
   "use strict";
 
-  var LoginCtrl = function($scope, $location, userService) {
+  var LoginCtrl = function($scope, $location,$cookieStore, userService) {
     $scope.credentials = {};
 
     $scope.login = function(credentials) {
-      userService.loginUser(credentials).then(function(/*user*/) {
+      userService.loginUser(credentials).then(function(user) {
+        $cookieStore.put('username',user.username);
+        //console.log("user "+user.username)
         $location.path("/dashboard");
       });
     };
@@ -16,7 +18,7 @@ define(["angular"], function(angular) {
 
 
 
-  LoginCtrl.$inject = ["$scope", "$location", "userService"];
+  LoginCtrl.$inject = ["$scope", "$location", "$cookieStore","userService"];
 
   return {
     LoginCtrl: LoginCtrl
