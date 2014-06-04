@@ -40,6 +40,7 @@ object InitialData {
               email = fields(2), phone = fields(3), address = fields(4)
             )
             Profiles.insert(profile)
+
           })
         }
         // create profile

@@ -1,23 +1,48 @@
-<div class="page-header"><h1>Log In <small>Use any email/password</small></h1></div>
-<form name="form">
-    <fieldset>
+<br/><br/><br/><br/>
+
+
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" data-ng-model="profile.name" placeholder="Name" required /><br />
+            <label for="name">First Name</label>
+            <input type="text" class="form-control" data-ng-model="profile.firstName" placeholder="Name" required/><br/>
         </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" data-ng-model="profile.email" placeholder="Email"  /><br />
+            <label for="name">Last Name</label>
+            <input type="text" class="form-control" data-ng-model="profile.lastName" placeholder="Name" required/><br/>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" data-ng-model="profile.phone" placeholder="Phone"  /><br />
+            <input type="text" class="form-control" data-ng-model="profile.phone" placeholder="Phone" required/><br/>
         </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" data-ng-model="profile.email" placeholder="Email"/><br/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="phone">Address</label>
+            <input type="text" class="form-control" data-ng-model="profile.address" placeholder="Address"/><br/>
+        </div>
+    </div>
+    <div class="col-md-4">
+
         <div class="form-group">
             <label for="birthday">Birthday</label>
-            <input type="text" class="form-control" data-ng-model="profile.birthday" placeholder="Birthday"  /><br />
-            <button class="btn btn-primary" data-ng-disabled="form.$invalid" data-ng-click="create(profile)">Create</button>
-        </div>
+            <input type="text" class="form-control" data-ng-model="profile.birthday" placeholder="Birthday"/><br/>
 
-    </fieldset>
-</form>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary" data-ng-disabled="form.$invalid" data-ng-click="create(profile)">Create</button>

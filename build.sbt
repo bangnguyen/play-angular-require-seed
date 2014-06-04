@@ -11,13 +11,12 @@ libraryDependencies ++= Seq(
   // WebJars dependencies
   "org.webjars" % "underscorejs" % "1.6.0-1",
   "org.webjars" % "jquery" % "1.11.0-1",
-  "org.webjars" % "bootstrap" % "3.1.1" exclude("org.webjars", "jquery"),
+  "org.webjars" % "bootstrap" % "3.1.1-1" exclude("org.webjars", "jquery"),
   "org.webjars" % "angularjs" % "1.2.14" exclude("org.webjars", "jquery"),
-  "org.webjars" % "angular-ui-bootstrap" % "0.11.0-2" exclude("org.webjars", "jquery"),
-  "org.webjars" % "ng-grid" % "2.0.11" ,
-  "org.webjars" % "ng-table" % "0.3.1",
+  "org.webjars" % "ng-grid" % "2.0.11",
   "com.typesafe.play" %% "play-slick" % "0.6.0.1",
-  "com.github.tototoshi" %% "scala-csv" % "1.0.0"
+  "com.github.tototoshi" %% "scala-csv" % "1.0.0",
+  "com.sksamuel.elastic4s" % "elastic4s_2.10" % "1.2.0.0"
 )
 
 playScalaSettings

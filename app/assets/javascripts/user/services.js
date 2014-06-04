@@ -35,7 +35,7 @@ define(["angular", "common"], function(angular) {
       user = undefined;
       },
       getUser : function() {
-        console.log("getUser "+ $cookieStore.get('username'))
+        //console.log("getUser "+ $cookieStore.get('username'))
         var username = $cookieStore.get('username')
         if(username!=undefined)
             user = {username : username}

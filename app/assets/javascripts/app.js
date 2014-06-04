@@ -6,12 +6,12 @@
  * of RequireJS and lazy-load stuff because the angular modules have their own dependency system.
  * Ideally the scripts you load will be modules that are defined by calling define()
  */
-define(["angular","home", "user", "dashboard","profile","utils","ui-bootstrap","ng-table"], function(angular) {
+define(["angular","home", "user", "dashboard","profile","utils","./common/moment.min",,"./common/ng-table"], function(angular) {
   "use strict";
 
   // We must already declare most dependencies here (except for common), or the submodules' routes
   // will not be resolved
-  return angular.module("app", ["home", "user", "dashboard","profile","utils","ui.bootstrap","ngTable"]);
+  return angular.module("app", ["home", "user", "dashboard","profile","utils","ngTable"]);
 });
 
 

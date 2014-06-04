@@ -7,7 +7,6 @@ import secure.Secured
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Reads._
 import com.github.tototoshi.csv.CSVReader
-import models.{Profiles, Profile}
 import play.api.db.slick._
 import play.api.mvc.{Action, Controller}
 import play.api.Play.current
@@ -29,7 +28,7 @@ object Application extends Controller with Secured {
           email = fields(2), phone = fields(3), address = fields(4)
         )
       })
-      println("profile count " + Profiles.count)
+      println("profile count " + models.Profiles.count)
       Ok(views.html.index())
   }
 
@@ -44,11 +43,21 @@ object Application extends Controller with Secured {
           routes.javascript.Application.login,
           routes.javascript.Application.logout,
           routes.javascript.Application.uploadFile,
-          routes.javascript.Application.getProfiles,
-          routes.javascript.Users.user,
-          routes.javascript.Users.createUser,
-          routes.javascript.Users.updateUser,
-          routes.javascript.Users.deleteUser
+          controllers.routes.javascript.Users.get,
+          controllers.routes.javascript.Users.create,
+          controllers.routes.javascript.Users.update,
+          controllers.routes.javascript.Users.delete,
+          controllers.routes.javascript.Profiles.get,
+          controllers.routes.javascript.Profiles.create,
+          controllers.routes.javascript.Profiles.search,
+          controllers.routes.javascript.Profiles.update,
+          controllers.routes.javascript.Profiles.deleteProfile,
+        //  controllers.routes.javascript.Profiles.list,
+          controllers.routes.javascript.Courses.get,
+          controllers.routes.javascript.Courses.create,
+          controllers.routes.javascript.Courses.update,
+          controllers.routes.javascript.Courses.delete,
+          controllers.routes.javascript.Courses.list
           // TODO Add your routes here
         )
       ).as(JAVASCRIPT)
@@ -118,18 +127,23 @@ object Application extends Controller with Secured {
       }
   }
 
-  def getProfiles = DBAction {
-    implicit rs =>
 
+  def list = DBAction {
+    implicit rs =>
       val profile = models.Profile(firstName = "nguyen", lastName = "vietbang",
         email = "vietbang.nguyen@yahoo.com", phone = "09889098", address = "11 dao duy tu "
       )
-      val query = for (p <- Profiles.profiles)
+      val query = for (p <- models.Profiles.profiles)
       yield (p)
       query.list().foreach(p =>
         println("list :" + p.firstName)
       )
       Ok(listToJson(query.list()))
   }
+
+
+
+
+
 
 }

@@ -22,6 +22,12 @@ define(["angular"], function(angular) {
     }, true);
 
 
+    $scope.hover = function(event) {
+        $(event.target).dropdown();
+        console.log("hover") ;
+    }
+
+
 
 
     $scope.logout = function() {
@@ -44,3 +50,4 @@ define(["angular"], function(angular) {
   };
 
 });
+
