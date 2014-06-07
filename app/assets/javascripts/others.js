@@ -7,4 +7,8 @@ define("bootstrap-hover-dropdown",["jquery", "./common/bootstrap-hover-dropdown.
 
 require(["jquery", "./common/bootstrap-hover-dropdown.min"], function() {
     "use strict";
+   /* $(function(){
+        $('.datepicker').datepicker();
+    })*/
+
 });

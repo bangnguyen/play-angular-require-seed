@@ -31,6 +31,9 @@ object Users {
   def findById(id: String)(implicit s: Session): Option[User] =
     users.where(_.id === id).firstOption
 
+  def findByUsername(username: String)(implicit s: Session): Option[User] =
+    users.where(_.username === username).firstOption
+
   def count(implicit s: Session): Int =
     Query(users.length).first
 

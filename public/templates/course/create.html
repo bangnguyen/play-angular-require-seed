@@ -1,18 +1,18 @@
 <br/><br/><br/><br/>
 
-<form name="registerProfile">
+<form name="registeritem">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="name">First Name</label>
-                <input type="text" class="form-control" data-ng-model="profile.firstName" placeholder="Name"
+                <input type="text" class="form-control" data-ng-model="item.firstName" placeholder="Name"
                        required/><br/>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="name">Last Name</label>
-                <input type="text" class="form-control" data-ng-model="profile.lastName" placeholder="Name"
+                <input type="text" class="form-control" data-ng-model="item.lastName" placeholder="Name"
                        required/><br/>
             </div>
         </div>
@@ -21,14 +21,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" class="form-control" data-ng-model="profile.phone" placeholder="Phone"
+                <input type="text" class="form-control" data-ng-model="item.phone" placeholder="Phone"
                        required/><br/>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" data-ng-model="profile.email" placeholder="Email"
+                <input type="email" class="form-control" data-ng-model="item.email" placeholder="Email"
                        required/><br/>
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="phone">Address</label>
-                <input type="text" class="form-control" data-ng-model="profile.address" placeholder="Address"/><br/>
+                <input type="text" class="form-control" data-ng-model="item.address" placeholder="Address"/><br/>
             </div>
         </div>
         <div class="col-md-4">
@@ -47,7 +47,7 @@
                 <div>
                     <p class="input-group">
                         <input type="text" class="form-control" datepicker-popup="{{format}}"
-                               ng-model="profile.birthday" placeholder="Birthday" is-open="opened"
+                               ng-model="item.birthday" placeholder="Birthday" is-open="opened"
                                datepicker-options="dateOptions"  close-text="Close"/>
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)"><i
@@ -58,6 +58,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-ng-click="create(profile)">Create</button>
+    <button class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-ng-click="create(item)">Create</button>
 
 </form>

@@ -3,3 +3,19 @@
     width: 500px;
     height: 300px;
 }
+
+
+.info-bar {
+    position: absolute;
+    top : 30px;
+    text-align: center;
+    width:100%;
+    z-index: 1000;
+}
+
+.inform-bar-content {
+    padding: 5px;
+    color: #fff;
+    text-align:center;
+}
+.inform-bar-content p{font-size: 25px;}

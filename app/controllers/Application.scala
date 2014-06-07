@@ -89,7 +89,6 @@ object Application extends Controller with Secured {
         },
         valid = {
           res =>
-            println(res)
             Ok(Json.obj("username" -> res._1)).withSession("username" -> res._1)
         }
       )

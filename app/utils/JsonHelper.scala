@@ -14,6 +14,7 @@ import play.api.libs.json.JsString
 import play.api.libs.json.JsBoolean
 import play.api.data.validation.ValidationError
 import play.api.libs.json.JsNumber
+import java.text.SimpleDateFormat
 
 
 trait JsonHelper {
@@ -92,6 +93,7 @@ trait JsonHelper {
 
 object JsonHelper extends JsonHelper {
 
+  val simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy")
 
   def anyToJson(value: Any): JsValue = {
     type mapStringAny = Map[String, Any]

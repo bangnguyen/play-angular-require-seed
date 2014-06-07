@@ -6,3 +6,5 @@ define(["angular", "./routes"], function(angular) {
     "use strict";
     return angular.module("profile", ["ngCookies", "ngRoute", "profile.routes"]);
 });
+
+

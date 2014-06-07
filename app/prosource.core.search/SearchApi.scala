@@ -1,8 +1,7 @@
-package search
+package prosource.core.search
 
 import com.sksamuel.elastic4s.ElasticDsl
-import search.Elastic._
-
+import Elastic._
 
 /**
  * Created by Marco Chu on 6/4/14.
@@ -18,7 +17,7 @@ object SearchApi {
     println(keyword + " " + page + " " + pageSize)
     query.from((page - 1) * pageSize).limit(pageSize)
     println(query.toString)
-    val response = client.sync.search(query)
+    val response = esClient.sync.search(query)
     ElasticDataHelper.getData(response)
   }
 

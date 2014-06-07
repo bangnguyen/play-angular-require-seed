@@ -4,20 +4,20 @@
 define(["angular","jsRoutes"], function(angular,jsRoutes) {
     "use strict";
 
-    var ProfileCtrl = function($scope,$location,$timeout,$http,ngTableParams,alertService) {
+    var CourseCtrl = function($scope,$location,$timeout,$http,ngTableParams,alertService) {
 
         var searchMode = false
 
 
 
-        $scope.create = function(profile) {
-            if($scope.registerProfile.$valid){
+        $scope.create = function(course) {
+            if($scope.registerCourse.$valid){
                 $http({
-                    url: jsRoutes.controllers.Profiles.create().url,
-                    data: profile,
+                    url: jsRoutes.controllers.Courses.create().url,
+                    data: course,
                     method: 'post'
                 }).success(function(data, status, headers, config) {
-                    alertService.alertInfo("A new profile has been created successfully ");
+                    alertService.alertInfo("A new course has been created successfully ");
                   }).
                     error(function(data, status, headers, config) {
                        alertService.alertDanger(data.message);
@@ -33,8 +33,8 @@ define(["angular","jsRoutes"], function(angular,jsRoutes) {
 
         }
 
-        $scope.deleteProfile = function(id) {
-            jsRoutes.controllers.Profiles.deleteProfile(id).ajax({
+        $scope.deletecourse = function(id) {
+            jsRoutes.controllers.Courses.deletecourse(id).ajax({
                     dataType : 'json',
                     type : "delete",
                     success:function(response){
@@ -57,7 +57,7 @@ define(["angular","jsRoutes"], function(angular,jsRoutes) {
         }, {
             total: 0, // length of data
             getData: function ($defer, params) {
-                jsRoutes.controllers.Profiles.search($scope.keywords,params.page(),params.count()).ajax({
+                jsRoutes.controllers.Courses.search($scope.keywords,params.page(),params.count()).ajax({
                         dataType: 'json',
                         success: function (response) {
                             params.total(response.total)
@@ -105,10 +105,10 @@ define(["angular","jsRoutes"], function(angular,jsRoutes) {
 
     };
 
-    ProfileCtrl.$inject = ["$scope", "$location","$timeout","$http","ngTableParams","alertService"];
+    CourseCtrl.$inject = ["$scope", "$location","$timeout","$http","ngTableParams","alertService"];
 
     return {
-        ProfileCtrl: ProfileCtrl
+        CourseCtrl: CourseCtrl
     };
 
 

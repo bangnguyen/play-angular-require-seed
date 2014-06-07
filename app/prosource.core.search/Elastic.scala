@@ -1,4 +1,4 @@
-package search
+package prosource.core.search
 
 import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.index.query.{FilterBuilders, QueryBuilders}
@@ -16,17 +16,14 @@ object Elastic {
   val profileType = "profile"
   val settings = ImmutableSettings.settingsBuilder()
     .put("http.enabled", false)
-    .put("path.home", "./temp/elastic/")
+    .put("path.home", "/tmp/elastic/")
 
-  val client = ElasticClient.local(settings.build)
+  val esClient = ElasticClient.local(settings.build)
 
-  client.execute { deleteIndex(defaultIndex) }
-
-  createIndex
 
 
   def createIndex = {
-    client.execute {
+    esClient.execute {
       create index defaultIndex mappings (
         profileType as(
           "id" typed StringType,

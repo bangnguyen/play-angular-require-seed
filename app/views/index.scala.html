@@ -19,27 +19,17 @@
   </head>
   <body>
     @*-- Header -- *@
-    <header class="navbar navbar-inverse navbar-fixed-top basics-nav" data-ng-controller="HeaderCtrl"
+    <header class=" navbar-inverse navbar-fixed-top basics-nav" data-ng-controller="HeaderCtrl"
         data-ng-cloak>
-      <div class="container" data-ng-switch="!!user" data-ng-cloak>
+      <div class="container" data-ng-switch="!!user" >
+
 
         <div data-ng-switch-when="true">
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle js-activated">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Dropdown header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                </ul>
-            </li>
+
 
             <div class="btn-group" dropdown is-open="status.isopen" >
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"  ng-disabled="disabled" ng-mouseover="hover($event)">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-hover="dropdown"  >
                    Management<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
@@ -107,7 +97,12 @@
       </div>
     </header>
     @* -- Main Content -- *@
+
     <div class="container" data-ng-cloak>
+        <div id="alert-container" style="position: relative; display: none">
+
+        </div>
+      <br/><br/>
       <div data-ng-view></div>
     </div>
     @*-- Footer -- *@
