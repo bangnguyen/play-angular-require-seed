@@ -1,3 +1,4 @@
+/*
 package secure
 
 import play.api.mvc.{Results, RequestHeader, EssentialAction, EssentialFilter}
@@ -36,3 +37,4 @@ object LoginFilter extends EssentialFilter {
   }
 
 }
+*/

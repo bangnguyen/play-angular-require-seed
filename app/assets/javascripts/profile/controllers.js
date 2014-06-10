@@ -57,7 +57,7 @@ define(["angular","jsRoutes"], function(angular,jsRoutes) {
         }, {
             total: 0, // length of data
             getData: function ($defer, params) {
-                jsRoutes.controllers.Profiles.search($scope.keywords,params.page(),params.count()).ajax({
+                jsRoutes.controllers.Search.searchProfilesByKeyword($scope.keywords,params.page(),params.count()).ajax({
                         dataType: 'json',
                         success: function (response) {
                             params.total(response.total)

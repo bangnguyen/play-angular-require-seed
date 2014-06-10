@@ -1,6 +1,22 @@
 package utils
 
 
+object Constant {
+
+  val AOX_STORE_CASSANDRA: String = "cassandra"
+  val AOX_STORE_INMEMORY: String = "inmemory"
+  val CASSANDRA_HOST: String = "cassandra.host"
+  val CASSANDRA_PORT: String = "cassandra.port"
+  val CASSANDRA_MAXCONNSPERHOST: String = "cassandra.maxConnectionsPerHost"
+  val CASSANDRA_KEYSPACE: String = "cassandra.keyspace"
+  val CASSANDRA_COLUMNFAMILY: String = "cassandra.columnfamily"
+  val CASSANDRA_CQL_VERSION: String = "cassandra.cql.version"
+  val defaultEntityManager = "default"
+  val compositeEntityManager = "composite"
+
+}
+
+
 object FuncResult {
   val CALL_SUCCESS = 0
   val CALL_FAIL = -1

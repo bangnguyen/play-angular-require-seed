@@ -4,81 +4,46 @@ package models
 import java.util.UUID
 import play.api.db.slick.Config.driver.simple._
 import scala.slick.lifted.Tag
+import utils.Constant
+import javax.persistence.{Entity, Id, Column}
+import scala.annotation.meta.field
 
 /**
  * Created by Marco Chu on 6/6/14.
  */
+
+@Entity
 case class CourseStudent(
-                          id: String = UUID.randomUUID().toString,
-                          courseId: String = "",
-                          studentId: String = "",
-                          isTuitionFeePaid: Boolean = false,
-                          isBookFeePaid : Boolean =  false,
-                          comment: String = " " ,
-                          isReserved : Boolean = false,
-                          tuitionFee : Integer = 0 ,
-                          bookFee : Integer = 0 ,
-                          salesStaffId : String ="",
-                          consultantId : String = "",
-
-
-
-
-
-
-
-
+                          @(Id@field) @(Column@field) (name="key")  id: String = UUID.randomUUID().toString,
+                          @(Column@field)    courseId: String = "",
+                          @(Column@field)   studentId: String = "",
+                          @(Column@field)     isTuitionFeePaid: Boolean = false,
+                          @(Column@field)    isBookFeePaid: Boolean = false,
+                          @(Column@field)    comment: String = " ",
+                          @(Column@field)    isReserved: Boolean = false,
+                          @(Column@field)    tuitionFee: Integer = 0,
+                          @(Column@field)    bookFee: Integer = 0,
+                          @(Column@field)    salesStaffId: String = "",
+                          @(Column@field)    consultantId: String = ""
                           ) extends BaseEntity {
 
-
+  def this() = this(null)
+  override def getId: String = id
   override def getData: Map[String, Any] = Map(
     "id" -> id,
     "courseId" -> courseId,
     "studentId" -> studentId,
-    "isPaid" -> isPaid,
-    "comment" -> comment
-
+    "isTuitionFeePaid" -> isTuitionFeePaid,
+    "isBookFeePaid" -> isBookFeePaid,
+    "comment" -> comment,
+    "isReserved" -> isReserved,
+    "tuitionFee" -> tuitionFee,
+    "bookFee" -> bookFee,
+    "salesStaffId" -> salesStaffId,
+    "consultantId" -> consultantId
   )
 }
 
-class CourseStudents(tag: Tag) extends Table[CourseStudent](tag, "CourseStudent") {
-
-  def id = column[String]("id", O.PrimaryKey, O.NotNull)
-
-  def courseId = column[String]("courseId", O.NotNull)
-
-  def studentId = column[String]("courseId", O.NotNull)
-
-  def isPaid = column[Boolean]("isPaid", O.Nullable)
-
-  def comment = column[String]("comment", O.Nullable)
+object CourseStudents extends CassandraDAO[CourseStudent, String](classOf[CourseStudent], Constant.defaultEntityManager)
 
 
-  def * = (id, courseId, studentId, isPaid, comment) <>(CourseStudent.tupled, CourseStudent.unapply _)
-
-}
-
-
-object CourseStudents {
-
-  val courseStudents = TableQuery[CourseStudents]
-
-  def findById(id: String)(implicit s: Session): Option[CourseStudent] =
-    courseStudents.where(_.id === id).firstOption
-
-  def count(implicit s: Session): Int =
-    Query(courseStudents.length).first
-
-  def insert(entity: CourseStudent)(implicit s: Session) {
-    courseStudents.insert(entity)
-  }
-
-  def update(id: String, entity: CourseStudent)(implicit s: Session) {
-
-  }
-  def delete(id: String)(implicit s: Session) {
-    courseStudents.where(_.id === id).delete
-  }
-
-
-}

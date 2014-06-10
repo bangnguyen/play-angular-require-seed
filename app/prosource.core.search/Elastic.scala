@@ -16,7 +16,7 @@ object Elastic {
   val profileType = "profile"
   val settings = ImmutableSettings.settingsBuilder()
     .put("http.enabled", false)
-    .put("path.home", "/tmp/elastic/")
+    .put("path.home", "./tmp/elastic/")
 
   val esClient = ElasticClient.local(settings.build)
 
@@ -33,7 +33,10 @@ object Elastic {
           "firstName" typed StringType,
           "lastName" typed StringType,
           "address" typed StringType,
-          "birthday" typed DateType
+          "birthday" typed DateType,
+          "created" typed DateType ,
+          "position"   typed StringType
+
           )
         )
     }
@@ -45,6 +48,7 @@ object Elastic {
 }
 
 object ElasticDataHelper {
+
 
   def getData(r: SearchResponse): Map[String, Any]= {
     val hits = r.getHits

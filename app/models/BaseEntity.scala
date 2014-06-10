@@ -9,6 +9,7 @@ import utils.JsonHelper._
 trait BaseEntity {
   def getData : Map[String,Any]
   def toJson : JsValue =  anyToJson(getData)
+  def getId : String
 }
 
 case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {

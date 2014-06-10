@@ -18,7 +18,12 @@ libraryDependencies ++= Seq(
   "org.webjars" % "ng-table" % "0.3.1",
   "com.typesafe.play" %% "play-slick" % "0.6.0.1",
   "com.github.tototoshi" %% "scala-csv" % "1.0.0",
-  "com.sksamuel.elastic4s" % "elastic4s_2.10" % "1.2.0.0"
+  "com.sksamuel.elastic4s" % "elastic4s_2.10" % "1.2.0.0",
+  "com.netflix.astyanax" % "astyanax-cassandra" % "1.56.48",
+  "com.netflix.astyanax" % "astyanax-core" % "1.56.48",
+  "com.netflix.astyanax" % "astyanax-entity-mapper" % "1.56.48",
+  "com.netflix.astyanax" % "astyanax-queue" % "1.56.48",
+  "com.netflix.astyanax" % "astyanax-thrift" % "1.56.48"
 )
 
 playScalaSettings

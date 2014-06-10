@@ -20,15 +20,6 @@ object Application extends Controller with Secured {
   /** Serves the index page, see views/index.scala.html */
   def index = DBAction {
     implicit request =>
-
-      val newFile = new File("/home/bangnv/Desktop/data1.csv")
-      val reader = CSVReader.open(newFile)
-      reader.foreach(fields => {
-        val profile = models.Profile(firstName = fields(0), lastName = fields(1),
-          email = fields(2), phone = fields(3), address = fields(4)
-        )
-      })
-      println("profile count " + models.Profiles.count)
       Ok(views.html.index())
   }
 
@@ -49,7 +40,6 @@ object Application extends Controller with Secured {
           controllers.routes.javascript.Users.delete,
           controllers.routes.javascript.Profiles.get,
           controllers.routes.javascript.Profiles.create,
-          controllers.routes.javascript.Profiles.search,
           controllers.routes.javascript.Profiles.update,
           controllers.routes.javascript.Profiles.deleteProfile,
         //  controllers.routes.javascript.Profiles.list,
@@ -57,7 +47,9 @@ object Application extends Controller with Secured {
           controllers.routes.javascript.Courses.create,
           controllers.routes.javascript.Courses.update,
           controllers.routes.javascript.Courses.delete,
-          controllers.routes.javascript.Courses.list
+          controllers.routes.javascript.Courses.list,
+          controllers.routes.javascript.Search.searchProfilesByKeyword,
+          controllers.routes.javascript.Search.getAllTeacher
           // TODO Add your routes here
         )
       ).as(JAVASCRIPT)
@@ -129,15 +121,9 @@ object Application extends Controller with Secured {
 
   def list = DBAction {
     implicit rs =>
-      val profile = models.Profile(firstName = "nguyen", lastName = "vietbang",
-        email = "vietbang.nguyen@yahoo.com", phone = "09889098", address = "11 dao duy tu "
-      )
-      val query = for (p <- models.Profiles.profiles)
-      yield (p)
-      query.list().foreach(p =>
-        println("list :" + p.firstName)
-      )
-      Ok(listToJson(query.list()))
+
+        Ok
+      //Ok(listToJson(query.list()))
   }
 
 

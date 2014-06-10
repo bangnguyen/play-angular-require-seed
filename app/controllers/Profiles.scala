@@ -15,7 +15,12 @@ import play.api.libs.json._
 import play.api.libs.json.Json._
 import play.api.libs.json.Reads._
 import utils.FuncResult._
-import java.util.Date
+import java.util.{UUID, Date}
+import utils.Position.Position
+import utils.Position
+import utils.Position.Position
+import com.sksamuel.elastic4s.ElasticDsl
+import com.sksamuel.elastic4s.ElasticDsl._
 
 /**
  * Created by Marco Chu on 5/30/14.
@@ -34,25 +39,26 @@ object Profiles extends Controller with Secured {
   def create() = DBAction(parse.json) {
     implicit request =>
       val userReads = (
-        (__ \ 'firstName).read[String](minLength[String](1)) and
-          (__ \ 'lastName).read[String](minLength[String](1)) and
-          (__ \ 'phone).read[String] (minLength[String](1)) and
-          (__ \ 'email).readNullable[String] and
-          (__ \ 'address).readNullable[String] and
+        (__ \ 'email).read[String](minLength[String](1)) and
+          (__ \ 'phone).read[String](minLength[String](1)) and
+          (__ \ 'firstName).read[String](minLength[String](1)) and
+          (__ \ 'lastName).read[String] and
+          (__ \ 'address).readNullable[String].map[String](v => v.getOrElse("")) and
+          (__ \ 'position).readNullable[String].map[Position](s =>
+            s.map(value => Position.withName(value)).getOrElse(Position.Student)) and
           (__ \ 'birthday).readNullable[String].map[Date](s =>
-            s.map(value => simpleDateFormat.parse(value)).getOrElse(null))
+            s.map(value => simpleDateFormat.parse(value)).getOrElse(new Date))
         ) tupled
 
       val callResult = userReads.reads(request.body).fold(
-        invalid = { errors =>
-          CALL_FAIL
+        invalid = {
+          errors =>
+            CALL_FAIL
         },
-        valid = { data =>
-          println(data)
-          models.Profiles.insert(models.Profile(firstName = data._1, lastName = data._2,
-            phone = data._3, email = data._4.getOrElse(""), address = data._5.getOrElse(""),
-           birthday = data._6))
-          CALL_SUCCESS
+        valid = {
+          data =>
+            models.Profiles.put(models.Profile.tupled(data))
+            CALL_SUCCESS
         }
       )
       Ok
@@ -67,6 +73,9 @@ object Profiles extends Controller with Secured {
   def deleteProfile(id: String) = DBAction(parse.empty) {
     implicit request =>
       models.Profiles.delete(id)
+      esClient.sync.execute {
+        ElasticDsl.delete id id from url(profileType)
+      }
 
       NoContent
   }
@@ -75,7 +84,8 @@ object Profiles extends Controller with Secured {
   def search(keyword: String, page: Int, pageSize: Int) = DBAction {
     implicit rs =>
 
-      Ok(mapToJson(SearchApi.search(keyword, page, pageSize,profileType)))
+      Ok(mapToJson(SearchApi.search(keyword, page, pageSize, profileType)))
   }
+
 
 }
