@@ -2,8 +2,6 @@ package models
 
 
 import java.util.UUID
-import play.api.db.slick.Config.driver.simple._
-import scala.slick.lifted.Tag
 import utils.Constant
 import javax.persistence.{Entity, Id, Column}
 import scala.annotation.meta.field

@@ -9,6 +9,7 @@ import com.sksamuel.elastic4s._
 import com.sksamuel.elastic4s.ElasticDsl._
 import com.sksamuel.elastic4s.mappings.FieldType.{DateType, LongType, IntegerType, StringType}
 import scala.concurrent.duration.Duration
+import java.io.File
 
 object Elastic {
   implicit val duration = Duration(10000, "millis")
@@ -16,7 +17,7 @@ object Elastic {
   val profileType = "profile"
   val settings = ImmutableSettings.settingsBuilder()
     .put("http.enabled", false)
-    .put("path.home", "./tmp/elastic/")
+    .put("path.home",String.format(".%stmp%selastic%s",File.separator,File.separator,File.separator))
 
   val esClient = ElasticClient.local(settings.build)
 

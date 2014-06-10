@@ -3,13 +3,11 @@ package controllers
 import play.api.mvc._
 import play.api.libs.json._
 import secure.Secured
-import play.api.db.slick.DBAction
 import play.api.libs.json.Reads._
 import java.util.{UUID, Date}
 import utils.JsonHelper._
 import utils.FuncResult._
 import play.api.libs.functional.syntax._
-import utils.Level
 import utils.Level.Level
 import utils.Level
 
@@ -20,14 +18,14 @@ import utils.Level
 object Courses extends Controller with Secured {
 
   /** Retrieves the user for the given id as JSON */
-  def get(id: String) = DBAction(parse.empty) {
+  def get(id: String) = Action(parse.empty) {
     request =>
     // TODO Find user and convert to JSON
       Ok(Json.obj("firstName" -> "John", "lastName" -> "Smith", "age" -> 42))
   }
 
   /** Creates a user from the given JSON */
-  def create() = DBAction(parse.json) {
+  def create() = Action(parse.json) {
     request =>
       val userReads = (
         (__ \ 'id).read[String] and
@@ -70,18 +68,18 @@ object Courses extends Controller with Secured {
       Ok
   }
 
-  def update(id: String) = DBAction(parse.json) {
+  def update(id: String) = Action(parse.json) {
     request =>
       Ok
   }
 
-  def delete(id: String) = DBAction(parse.empty) {
+  def delete(id: String) = Action(parse.empty) {
     request =>
       Ok
   }
 
 
-  def list = DBAction {
+  def list = Action {
     request =>
       Ok
   }

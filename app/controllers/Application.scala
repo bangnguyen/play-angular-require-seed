@@ -1,24 +1,19 @@
 package controllers
 
-import scala.slick.driver.H2Driver.simple._
-import java.io.File
 import play.api.libs.json._
 import secure.Secured
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Reads._
 import com.github.tototoshi.csv.CSVReader
-import play.api.db.slick._
 import play.api.mvc.{Action, Controller}
-import play.api.Play.current
 import play.api.Routes
-import play.api.db.slick.DBAction
-import utils.JsonHelper._
+import db.FakeData
 
 /** Application controller, handles authentication */
 object Application extends Controller with Secured {
 
   /** Serves the index page, see views/index.scala.html */
-  def index = DBAction {
+  def index = Action {
     implicit request =>
       Ok(views.html.index())
   }
@@ -119,11 +114,17 @@ object Application extends Controller with Secured {
   }
 
 
-  def list = DBAction {
+  def list = Action {
     implicit rs =>
 
         Ok
       //Ok(listToJson(query.list()))
+  }
+
+  def initData = Action {
+    request =>
+      FakeData.initData()
+      Ok("data init")
   }
 
 

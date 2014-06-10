@@ -1,27 +1,16 @@
 package models
 
 import java.util.{UUID, Date}
-import play.api.db.slick.Config.driver.simple._
-import prosource.core.search.Elastic
-import prosource.core.search.Elastic._
-import scala.slick.lifted.Tag
-import com.sksamuel.elastic4s.{IndexesTypes, ElasticDsl}
-import utils.{Constant, Position}
-import utils.Position._
-import utils.JsonHelper._
-import exception.PsException
+
+import utils.Constant
 import javax.persistence.{Entity, Column, Id}
 import scala.annotation.meta.field
 import utils.Position
 import utils.Position.Position
-import models.Profile
 import com.netflix.astyanax.serializers.AbstractSerializer;
-import com.netflix.astyanax.serializers.ComparatorType
 import com.netflix.astyanax.entitystore.Serializer
 import java.nio.ByteBuffer
 import java.nio.charset.Charset
-import scala.collection.JavaConverters._
-import models.Profile
 ;
 
 

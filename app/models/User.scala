@@ -10,11 +10,12 @@ import scala.annotation.meta.field
  */
 @Entity
 case class User(
-                 @(Id@field) @(Column@field)(name="key")  username: String,
+                 @(Id@field) @(Column@field)(name = "key") username: String,
                  @(Column@field) password: String,
                  @(Column@field) created: Date = new Date()
-                 )   extends BaseEntity  {
+                 ) extends BaseEntity {
   override def getId: String = username
+
   def this() = this(null, null)
 
   override def getData: Map[String, Any] = ???

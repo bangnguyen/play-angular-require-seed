@@ -16,7 +16,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "angular-ui-bootstrap" % "0.11.0",
  // "org.webjars" % "ng-grid" % "2.0.11",
   "org.webjars" % "ng-table" % "0.3.1",
-  "com.typesafe.play" %% "play-slick" % "0.6.0.1",
+ // "com.typesafe.play" %% "play-slick" % "0.6.0.1",
   "com.github.tototoshi" %% "scala-csv" % "1.0.0",
   "com.sksamuel.elastic4s" % "elastic4s_2.10" % "1.2.0.0",
   "com.netflix.astyanax" % "astyanax-cassandra" % "1.56.48",

@@ -4,10 +4,8 @@ package controllers
 import prosource.core.search.SearchApi
 import prosource.core.search.Elastic._
 import secure.Secured
-import play.api.db.slick._
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import play.api.Play.current
-import play.api.db.slick.DBAction
 import utils.JsonHelper._
 
 import play.api.libs.functional.syntax._
@@ -16,7 +14,6 @@ import play.api.libs.json.Json._
 import play.api.libs.json.Reads._
 import utils.FuncResult._
 import java.util.{UUID, Date}
-import utils.Position.Position
 import utils.Position
 import utils.Position.Position
 import com.sksamuel.elastic4s.ElasticDsl
@@ -29,14 +26,14 @@ object Profiles extends Controller with Secured {
 
 
   /** Retrieves the user for the given id as JSON */
-  def get(id: String) = DBAction(parse.empty) {
+  def get(id: String) = Action(parse.empty) {
     request =>
     // TODO Find user and convert to JSON
       Ok(Json.obj("firstName" -> "John", "lastName" -> "Smith", "age" -> 42))
   }
 
   /** Creates a user from the given JSON */
-  def create() = DBAction(parse.json) {
+  def create() = Action(parse.json) {
     implicit request =>
       val userReads = (
         (__ \ 'email).read[String](minLength[String](1)) and
@@ -64,13 +61,13 @@ object Profiles extends Controller with Secured {
       Ok
   }
 
-  def update(id: String) = DBAction(parse.json) {
+  def update(id: String) = Action(parse.json) {
     request =>
       Ok
   }
 
 
-  def deleteProfile(id: String) = DBAction(parse.empty) {
+  def deleteProfile(id: String) = Action(parse.empty) {
     implicit request =>
       models.Profiles.delete(id)
       esClient.sync.execute {
@@ -81,7 +78,7 @@ object Profiles extends Controller with Secured {
   }
 
 
-  def search(keyword: String, page: Int, pageSize: Int) = DBAction {
+  def search(keyword: String, page: Int, pageSize: Int) = Action {
     implicit rs =>
 
       Ok(mapToJson(SearchApi.search(keyword, page, pageSize, profileType)))

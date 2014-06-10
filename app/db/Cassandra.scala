@@ -10,19 +10,13 @@ import com.netflix.astyanax.model.ColumnFamily
 import com.netflix.astyanax.serializers._
 import com.netflix.astyanax.thrift.ThriftFamilyFactory
 import com.typesafe.config.ConfigFactory
-import db.ColumnFamilyParams._
-import prosource.core.search.Elastic
-import com.sksamuel.elastic4s.ElasticDsl
-import com.sksamuel.elastic4s.ElasticDsl._
 
 
 import org.apache.cassandra.thrift.InvalidRequestException
 import utils.Constant
-import models._
-import prosource.core.search.Elastic._
+
 
 object Cassandra {
- // SingletonEmbeddedCassandra.getInstance
   Thread.sleep(1000 * 1)
 
   var keyspace: astyanax.Keyspace = null
@@ -72,7 +66,7 @@ object Cassandra {
         }
         else throw exception
       }
-      case ex => throw ex
+      case ex : Throwable=> throw ex
     }
     existKeySpace
   }
@@ -111,18 +105,7 @@ object Cassandra {
   }
 
 
-  def firstTime = {
-    dropKeySpace
-    createKeyspace
-    Users.createStorage(null)
-    Profiles.createStorage(profileOptions)
-    //Profiles.createStorage(profileOptions)
-    Courses.createStorage(courseOptions)
-    CourseStudents.createStorage(null)
-    Elastic.esClient.execute { deleteIndex(Elastic. defaultIndex) }
-    Elastic.createIndex
 
-  }
 
   def buildRowKey(className: String, key: String) = StringBuilder.newBuilder.append(className).append("_").append(key).toString().toLowerCase()
 }

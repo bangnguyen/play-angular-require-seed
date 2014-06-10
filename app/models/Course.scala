@@ -1,8 +1,5 @@
 package models
 import java.util.{UUID, Date}
-import play.api.db.slick.Config.driver.simple._
-import scala.slick.lifted.Tag
-import utils.JsonHelper._
 import utils.{Constant, Level}
 import utils.Level.Level
 import javax.persistence.{Entity, Column, Id}

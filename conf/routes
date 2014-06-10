@@ -42,7 +42,7 @@ DELETE        /courses/:id            controllers.Courses.delete(id: String)
 GET           /search                    controllers.Search.searchProfilesByKeyword(keyword: String ?= "", page: Int ?=0, pageSize: Int ?=10)
 GET           /search/teachers           controllers.Search.getAllTeacher()
 
-
+GET           /initData    controllers.Application.initData()
 
 # Static
 # ~~~~
