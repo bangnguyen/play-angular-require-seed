@@ -19,75 +19,31 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
-    @*-- Header -- *@
-    <header class=" navbar-inverse navbar-fixed-top basics-nav" data-ng-controller="HeaderCtrl"
+
+    <nav class="navbar navbar-fixed-top " data-ng-controller="HeaderCtrl"
         data-ng-cloak>
       <div class="container" data-ng-switch="!!user" >
-
-
-        <div data-ng-switch-when="true">
-
-
-
-            <div class="btn-group" dropdown is-open="status.isopen" >
-                <button type="button" class="btn btn-primary dropdown-toggle" data-hover="dropdown"  >
-                   Management<span class="caret"></span>
-                </button>
+        <ul class ="nav nav-pills "data-ng-switch-when="true">
+            <li class="btn-group" dropdown is-open="status.isopen" >
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Management<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/profiles">Profiles</a></li>
                     <li><a href="#/createProfile">Create Profile</a></li>
-                    <li><a href="#/courses">courses</a></li>
+                    <li><a href="#/courses">Courses</a></li>
                     <li><a href="#/createCourse">Create Course</a></li>
                 </ul>
-            </div>
+            </li>
 
-            <div class="btn-group" dropdown  >
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"   ng-disabled="disabled" ng-mouseover="hover($event)">
-                    Account <span class="caret"></span>
-                </button>
+            <li class="btn-group" dropdown  >
+              <a class="dropdown-toggle" data-toggle="dropdown" ng-disabled="disabled" ng-mouseover="hover($event)">
+                Account <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                    <li>
-                        <a href="" data-ng-click="logout()">
-                            <span class="glyphicon glyphicon-off"></span> Logout
-                        </a>
-                    </li>
+                    <li><a href="" data-ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
                 </ul>
-            </div>
-
-
-         @* <ul class="nav navbar-nav navbar-right">
-
-              <li>
-          *@@*<div class="btn-group" dropdown is-open="status.isopen">*@@*
-              <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-                  Management <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                  <li><a href="#/profiles">Profiles</a></li>
-                  <li><a href="#/createProfile">Create Profile</a></li>
-              </ul>
-          </li>
-
-
-            <li><a ng-click="getProfilesList()">Upload File</a></li>
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span> {{user.username}}
-                <b class="caret"></b>
-              </a>
-
-              <ul class="dropdown-menu">
-                <li><a href="#/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                <li>
-                  <a href="" data-ng-click="logout()">
-                    <span class="glyphicon glyphicon-off"></span> Logout
-                  </a>
-                </li>
-              </ul>
             </li>
-          </ul>*@
-        </div>
+        </ul>
         <div data-ng-switch-when="false">
 
           <ul class="nav navbar-nav pull-right">
@@ -96,16 +52,16 @@
           </ul>
         </div>
       </div>
-    </header>
+    </nav>
+    @*-- Header -- *@
+     <header></header>
     @* -- Main Content -- *@
+    <section class="container" data-ng-cloak>
+        <div id="alert-container" style="position: fixed;top: 60px;z-index: 1000;width: 100%;left: 0; display:none;"></div>
+        <br/><br/>
+        <div data-ng-view></div>
+    </section>
 
-    <div class="container" data-ng-cloak>
-        <div id="alert-container" style="position: relative; display: none">
-
-        </div>
-      <br/><br/>
-      <div data-ng-view></div>
-    </div>
     @*-- Footer -- *@
     <footer data-ng-controller="FooterCtrl">
     </footer>

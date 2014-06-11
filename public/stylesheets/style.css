@@ -5,13 +5,13 @@
 }
 
 
-.info-bar {
+/*.info-bar {
     position: absolute;
     top : 30px;
     text-align: center;
     width:100%;
     z-index: 1000;
-}
+}*/
 
 .inform-bar-content {
     padding: 5px;
@@ -19,6 +19,19 @@
     text-align:center;
 }
 .inform-bar-content p{font-size: 25px;}
+/*hide class*/
+.ads-hide{visibility: hidden;}
+/*Navigation*/
+nav.navbar{background: #428bca;border-bottom: 1px solid #ddd;padding-top: 5px;}
+nav.navbar ul li a{ color: #ddd;}
+nav.navbar ul li a:hover,
+nav.navbar ul li a:focus{color: #fff; background-color: transparent;}
+nav.navbar ul li ul.dropdown-menu li a{color: #555;}
+nav.navbar ul li ul.dropdown-menu li a:hover,
+nav.navbar ul li ul.dropdown-menu li a:focus{color: #000; background-color: transparent;}
+nav.navbar ul li.open>a,
+nav.navbar ul li.open>a:hover,
+nav.navbar ul li.open>a:focus{background-color: transparent;}
 /*form course create*/
 .course-create form {
     padding-bottom: 30px;

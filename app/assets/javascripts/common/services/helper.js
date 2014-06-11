@@ -22,7 +22,7 @@ define(["angular"], function(angular) {
         }
         this.alertDanger = function(message){
             if(!$("#alert-container").is(':visible')){
-                $("#alert-container").html("<div class='alert alert-danger info-bar'>"+
+                $("#alert-container").html("<div class='alert alert-danger info-bar container'>"+
                     message+"</div>");
                 $("#alert-container").show()
                 timeOutAlert()
@@ -31,7 +31,7 @@ define(["angular"], function(angular) {
 
         this.alertInfo = function(message){
             if(!$("#alert-container").is(':visible')){
-                $("#alert-container").html("<div class='alert alert-info info-bar'>"+
+                $("#alert-container").html("<div class='alert alert-info info-bar container'>"+
                     message+"</div>");
                 $("#alert-container").show()
                 timeOutAlert()
@@ -40,7 +40,7 @@ define(["angular"], function(angular) {
 
         this.alertWarning = function(message){
             if(!$("#alert-container").is(':visible')){
-                $("#alert-container").html("<div class='alert alert-warning info-bar'>"+
+                $("#alert-container").html("<div class='alert alert-warning info-bar container'>"+
                     message+"</div>");
                 $("#alert-container").show()
                 timeOutAlert()
