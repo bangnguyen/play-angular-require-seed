@@ -4,66 +4,62 @@
     <div class="container-fluid  ">
         <div class="row">
             <div class="col-md-4">
-                <div class="input-group" >
-                    <label for="name">Code</label>
-                    <input type="text" class="form-control" data-ng-model="item.code" placeholder="Code"
+                <div class="form-group" >
+                   <label class="control-label">Code</label>
+                   <input type="text" class="form-control" data-ng-model="item.code" placeholder="Code"
                            required/>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="input-group">
-                    <label for="name">Title</label>
-                    <input type="text" class="form-control" data-ng-model="item.title" placeholder="Title"
+                <div class="form-group">
+                   <label class="control-label">Title</label>
+                   <input type="text" class="form-control" data-ng-model="item.title" placeholder="Title"
                            required/>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-              <div class="input-group">
-                    <label >Level</label>   <br/>
-                  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; <select class="form-control" ng-model="item.level" ng-options="level as level for level in levels"></select><br>
+              <div class="form-group">
+                   <label class="control-label" >Level</label>
+                  <select class="form-control" ng-model="item.level" ng-options="level as level for level in levels"></select>
                 </div>
 
 
             </div>
             <div class="col-md-4">
-                <div class="input-group">
-                    <label >Teacher</label>   <br/>
-                    &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; <select class="form-control" required ng-model="item.teacher" ng-options="teacher.id as teacher.fullName for teacher in  teachers"></select><br>
+                <div class="form-group">
+                   <label class="control-label" >Teacher</label>
+                   <select class="form-control" required ng-model="item.teacher" ng-options="teacher.id as teacher.fullName for teacher in  teachers"></select>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="input-group">
-                    <label >Start</label>
+                <div class="form-group">
+                   <label class="control-label" >Start</label>
                     <div>
-                        <p class="input-group">
+                        <div class="input-group">
                             <input type="text" class="form-control" datepicker-popup="{{format}}"
                                    ng-model="item.start" placeholder="Start" is-open="start"
                                    datepicker-options="dateOptions"  close-text="Close"/>
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event,0)"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                        </p>
+                        <span type="button" class="input-group-addon button" ng-click="open($event,0)"><i
+                                class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="input-group">
-                    <label >Finish</label>
+                <div class="form-group">
+                   <label class="control-label" >Finish</label>
                     <div>
-                        <p class="input-group">
+                        <div class="input-group">
                             <input type="text" class="form-control" datepicker-popup="{{format}}"
                                    ng-model="item.finish" placeholder="Finish" is-open="finish"
                                    datepicker-options="dateOptions"  close-text="Close"/>
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event,1)"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                        </p>
+                        <span type="button" class="input-group-addon button" ng-click="open($event,1)"><i
+                                class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,24 +67,24 @@
 
         <div class="row">
             <div class="col-md-8">
-                <div class="input-group">
-                    <label for="phone">Days & Hours</label>
-                    <input type="text" class="form-control" data-ng-model="item.daysHours" placeholder="Level"
+                <div class="form-group">
+                   <label class="control-label" >Days & Hours</label>
+                   <input type="text" class="form-control" data-ng-model="item.daysHours" placeholder="Level"
                            required/>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="input-group">
-                    <label >Price</label>
-                    <input type="text" class="form-control" data-ng-model="item.price" placeholder="Price"
-                           required/> vnd
+                <div class="form-group">
+                   <label class="control-label" >Price</label>
+                    <div class="input-group"><input type="text" class="form-control" data-ng-model="item.price" placeholder="Price"
+                           required/><span class="input-group-addon">VND</span></div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="input-group" >
-                    <label for="email">Discount</label>
+                <div class="form-group" >
+                   <label class="control-label" >Discount</label>
                     <input type="text" class="form-control" ng-model="item.discount" placeholder="Discount"
                            required/>
                 </div>
@@ -97,13 +93,12 @@
 
         <div class="row">
             <div class="col-md-8">
-                <div >
-                    <label >Comment</label>
-                    <input type="text" class="form-control" data-ng-model="item.comment" placeholder="Comment"
+                <div class="form-group" >
+                   <label class="control-label" >Comment</label>
+                    <textarea type="text" class="form-control" data-ng-model="item.comment" placeholder="Comment"
                            required/>
                 </div>
             </div>
-
         </div>
 
         <button class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-ng-click="create(item)">Create</button>
