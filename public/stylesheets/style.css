@@ -19,3 +19,7 @@
     text-align:center;
 }
 .inform-bar-content p{font-size: 25px;}
+/*form course create*/
+.course-create form {
+    padding-bottom: 30px;
+}
