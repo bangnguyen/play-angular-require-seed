@@ -34,6 +34,10 @@ import javax.persistence.PersistenceException
  * To change this template use File | Settings | File Templates.
  */
 class CassandraDAO[T, K](clazz: Class[T], mode: String = "default", options: Predef.Map[String, String] = Predef.Map[String, String]()) {
+
+
+
+
   val keyspace = Cassandra.keyspace
   var entityManager: EntityManager[T, K] = null
   var log = Logger.of(this.clazz)
@@ -48,6 +52,27 @@ class CassandraDAO[T, K](clazz: Class[T], mode: String = "default", options: Pre
         .build()
     }
     case _ =>
+  }
+
+
+  def findByKeyValue(key : String, value : Any) ={
+    var cql = ""
+    if(value.isInstanceOf[String]){
+      cql = String.format("Select * from %s where %s = '%s' ",
+        clazz.getSimpleName, key, value.asInstanceOf[String]
+      )
+    } else {
+      cql = String.format("Select * from %s where %s = '%s' ",
+        "Profile", key, value.toString
+      )
+    }
+    val objects  = entityManager.find(cql)
+    if (objects.size >= 1) objects.head
+    else null
+  }
+
+  def isExisted ( key:String , value :Any) ={
+    findByKeyValue(key,value) !=null
   }
 
 

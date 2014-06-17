@@ -11,8 +11,7 @@ import com.netflix.astyanax.serializers.AbstractSerializer;
 import com.netflix.astyanax.entitystore.Serializer
 import java.nio.ByteBuffer
 import java.nio.charset.Charset
-;
-
+import utils.Constant._
 
 
 @Entity
@@ -21,22 +20,25 @@ case class Profile(
                     @(Column@field) phone: String = "",
                     @(Column@field) firstName: String = "",
                     @(Column@field) lastName: String = "",
-                    @(Column@field) address: String  = "",
+                    @(Column@field) address: String = "",
                     @(Column@field) @(Serializer@field)(classOf[PositionSerializer]) position: Position = Position.Student,
-                    @(Column@field) birthday: Date  = new Date()
+                    @(Column@field) birthday: Date = new Date()
                     ) extends BaseEntity {
   @(Id@field) @(Column@field)(name = "key") var id: String = UUID.randomUUID().toString
   @(Column@field) var created: Date = new Date()
+
+  def this() = this(null)
   var fullName = firstName + " " + lastName
-  override def getData: Map[String, Any] = Map(
+
+  override def getData(option : Int = forView): Map[String, Any] = Map(
     "email" -> email,
-    "phone" -> phone,
+    "phone" -> phone.toString,
     "firstName" -> firstName,
     "lastName" -> lastName,
     "address" -> address,
-    "position" -> position.toString ,
-    "birthday" -> birthday,
-    "created" -> created,
+    "position" -> position.toString,
+    "birthday" -> (if (option == forView)  birthday.getTime else created) ,
+    "created" -> (if (option == forView)  created.getTime else created) ,
     "id" -> id,
     "fullName" -> fullName
   )
@@ -45,6 +47,7 @@ case class Profile(
 }
 
 class PositionSerializer extends AbstractSerializer[Position] {
+
   import PositionSerializer._
 
   override def fromByteBuffer(byteBuffer: ByteBuffer): Position = {
@@ -54,8 +57,6 @@ class PositionSerializer extends AbstractSerializer[Position] {
     return Position.withName(charset.decode(byteBuffer).toString());
 
   }
-
-
 
 
   override def toByteBuffer(obj: Position): ByteBuffer = {
@@ -77,9 +78,34 @@ object PositionSerializer {
 
   def get(): PositionSerializer = instance
 }
+
 //object PositionSerializer
 
-object Profiles extends CassandraDAO[Profile, String](classOf[Profile], Constant.defaultEntityManager)
+object Profiles extends CassandraDAO[Profile, String](classOf[Profile], Constant.defaultEntityManager)   {
+
+
+  /*def findByKeyValue(key : String, value : Any) ={
+    var cql = ""
+    if(value.isInstanceOf[String]){
+       cql = String.format("Select * from %s where %s = '%s' ",
+        "Profile", key, value.asInstanceOf[String]
+      )
+    } else {
+      cql = String.format("Select * from %s where %s = '%s' ",
+        "Profile", key, value.toString
+      )
+    }
+    val objects: List[Profile] = find(cql)
+    if (objects.size >= 1) objects.head
+    else null
+  }*/
+
+
+
+
+
+
+}
 
 
 /*  Elastic.esClient.sync.execute {

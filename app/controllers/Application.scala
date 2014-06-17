@@ -36,15 +36,16 @@ object Application extends Controller with Secured {
           controllers.routes.javascript.Profiles.get,
           controllers.routes.javascript.Profiles.create,
           controllers.routes.javascript.Profiles.update,
-          controllers.routes.javascript.Profiles.deleteProfile,
-        //  controllers.routes.javascript.Profiles.list,
+          controllers.routes.javascript.Profiles.deleteObject,
           controllers.routes.javascript.Courses.get,
           controllers.routes.javascript.Courses.create,
           controllers.routes.javascript.Courses.update,
-          controllers.routes.javascript.Courses.delete,
+          controllers.routes.javascript.Courses.deleteObject,
           controllers.routes.javascript.Courses.list,
           controllers.routes.javascript.Search.searchProfilesByKeyword,
-          controllers.routes.javascript.Search.getAllTeacher
+          controllers.routes.javascript.Search.getAllTeachers,
+          controllers.routes.javascript.Search.searchAllCourses,
+          controllers.routes.javascript.Search.searchAllOpenCourses
           // TODO Add your routes here
         )
       ).as(JAVASCRIPT)

@@ -6,6 +6,7 @@ import utils.Constant
 import javax.persistence.{Entity, Id, Column}
 import scala.annotation.meta.field
 
+import utils.Constant._
 /**
  * Created by Marco Chu on 6/6/14.
  */
@@ -14,8 +15,8 @@ import scala.annotation.meta.field
 case class CourseStudent(
                           @(Id@field) @(Column@field) (name="key")  id: String = UUID.randomUUID().toString,
                           @(Column@field)    courseId: String = "",
-                          @(Column@field)   studentId: String = "",
-                          @(Column@field)     isTuitionFeePaid: Boolean = false,
+                          @(Column@field)    studentId: String = "",
+                          @(Column@field)    isTuitionFeePaid: Boolean = false,
                           @(Column@field)    isBookFeePaid: Boolean = false,
                           @(Column@field)    comment: String = " ",
                           @(Column@field)    isReserved: Boolean = false,
@@ -27,7 +28,7 @@ case class CourseStudent(
 
   def this() = this(null)
   override def getId: String = id
-  override def getData: Map[String, Any] = Map(
+  override def getData(options : Int = forView): Map[String, Any] = Map(
     "id" -> id,
     "courseId" -> courseId,
     "studentId" -> studentId,
@@ -42,6 +43,8 @@ case class CourseStudent(
   )
 }
 
-object CourseStudents extends CassandraDAO[CourseStudent, String](classOf[CourseStudent], Constant.defaultEntityManager)
+object CourseStudents extends CassandraDAO[CourseStudent, String](classOf[CourseStudent], Constant.defaultEntityManager)  {
+
+}
 
 

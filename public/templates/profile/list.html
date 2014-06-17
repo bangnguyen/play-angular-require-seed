@@ -13,31 +13,19 @@
     Total : <span>{{tableParams.total()}}</span>
     <table ng-table="tableParams" class="table table-condensed table-hover">
         <tr id="tr{{item.id}}" ng-repeat="item in $data">
-            <td class="rowTd"  data-title="'ID'">
-                <span>
-                    {{item.id}}
-                </span>
-            </td>
             <td class="rowTd"  data-title="'FullName'">
-                <span ng-if="!item.$edit">
-                    {{item.fullName}}
-                </span>
-                <div ng-if="item.$edit">
-                    <input class="form-control" type="text" ng-model="item.fullName" />
-                </div>
+                <a href="#/profiles/{{item.id}}/view">{{item.fullName}}</a>
             </td>
             <td class="rowTd"  data-title="'Email'">
-                 <span ng-if="!item.$edit">
-                    {{item.email}}
-                </span>
-                <div ng-if="item.$edit">
-                    <input class="form-control" type="text" ng-model="item.email" />
-                </div>
+                {{item.email}}
             </td>
+            <td class="rowTd"  data-title="'Phone'">
+                {{item.phone}}
+            </td>
+
             <td data-title="'Actions'" >
-                <a ng-if="!item.$edit" href="" class="btn btn-default btn-xs" ng-click="item.$edit = true">Edit</a>
-                <a ng-if="item.$edit" href="" class="btn btn-primary btn-xs" ng-click="item.$edit = false">Save</a>
-                <a ng-if="!item.$edit" href="" class="btn btn-danger btn-xs" ng-click="deleteProfile(item.id)">Delete</a>
+                <a href="#/profiles/{{item.id}}/edit" class="btn btn-default btn-xs"  >Edit</a>
+                <a href="" class="btn btn-danger btn-xs" ng-click="deleteObject(item)">Delete</a>
             </td>
         </tr>
 

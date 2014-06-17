@@ -23,26 +23,26 @@ PUT           /users/:id              controllers.Users.update(id: String)
 DELETE        /users/:id              controllers.Users.delete(id: String)
 
 #Profiles
-#GET           /profiles                controllers.Profiles.list(keyword: String ?= "", page: Int ?=0, pageSize: Int ?=10)
 
 GET           /profiles/:id           controllers.Profiles.get(id: String)
 POST          /profiles               controllers.Profiles.create()
 PUT           /profiles/:id           controllers.Profiles.update(id: String)
-DELETE        /profiles/:id           controllers.Profiles.deleteProfile(id: String)
-#GET           /search/:keywords        controllers.Profiles.search(keywords: String)
+DELETE        /profiles/:id           controllers.Profiles.deleteObject(id: String)
 
 #Profiles
 GET           /courses                controllers.Courses.list
 GET           /courses/:id            controllers.Courses.get(id: String)
 POST          /courses                controllers.Courses.create()
 PUT           /courses/:id            controllers.Courses.update(id: String)
-DELETE        /courses/:id            controllers.Courses.delete(id: String)
+DELETE        /courses/:id            controllers.Courses.deleteObject(id: String)
 
 
-GET           /search                    controllers.Search.searchProfilesByKeyword(keyword: String ?= "", page: Int ?=0, pageSize: Int ?=10)
-GET           /search/teachers           controllers.Search.getAllTeacher()
+GET           /search/profiles        controllers.Search.searchProfilesByKeyword(keyword: String ?= "", page: Int ?=0, pageSize: Int ?=10)
+GET           /search/teachers        controllers.Search.getAllTeachers()
+GET           /search/allCourses          controllers.Search.searchAllCourses()
+GET           /search/allOpenCourses          controllers.Search.searchAllOpenCourses()
+GET           /initData               controllers.Application.initData()
 
-GET           /initData    controllers.Application.initData()
 
 # Static
 # ~~~~

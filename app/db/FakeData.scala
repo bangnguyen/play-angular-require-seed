@@ -11,6 +11,8 @@ import com.sksamuel.elastic4s.ElasticDsl
 import prosource.core.search.Elastic._
 import models.User
 import utils.Position
+import utils.Constant._
+import java.util.UUID
 
 /**
  * Created by Marco Chu on 6/10/14.
@@ -22,11 +24,12 @@ object FakeData {
   def initData() = {
     println("initData")
     Cassandra.dropKeySpace
+    Thread.sleep(2000)
     Cassandra.createKeyspace
     Users.createStorage(null)
     Profiles.createStorage(profileOptions)
     Courses.createStorage(courseOptions)
-    CourseStudents.createStorage(null)
+    CourseStudents.createStorage(courseStudents)
     Elastic.esClient.execute {
       deleteIndex(Elastic.defaultIndex)
     }
@@ -59,7 +62,7 @@ object FakeData {
       )
       Profiles.put(profile)
       Elastic.esClient.sync.execute {
-        ElasticDsl.index into(defaultIndex, profileType) id profile.id fields profile.getData
+        ElasticDsl.index into(defaultIndex, profileType) id profile.id fields profile.getData(forEs)
       }
     })
 
@@ -71,14 +74,14 @@ object FakeData {
     Profiles.put(profile1)
 
     Elastic.esClient.sync.execute {
-      ElasticDsl.index into(defaultIndex, profileType) id profile1.id fields profile1.getData
+      ElasticDsl.index into(defaultIndex, profileType) id profile1.id fields profile1.getData(forEs)
     }
     val profile2 = models.Profile(firstName = "phạm", lastName = " huy hùng",
       email = "phamhuyhung@gmail.com", phone = "0988787657", address = "30 hang duong", position = Position.Teacher
     )
     Profiles.put(profile2)
     Elastic.esClient.sync.execute {
-      ElasticDsl.index into(defaultIndex, profileType) id profile2.id fields profile2.getData
+      ElasticDsl.index into(defaultIndex, profileType) id profile2.id fields profile2.getData(forEs)
     }
 
     val profile3 = models.Profile(firstName = "nguyễn", lastName = " hồng ngọc",
@@ -86,8 +89,37 @@ object FakeData {
     )
     Profiles.put(profile3)
     Elastic.esClient.sync.execute {
-      ElasticDsl.index into(defaultIndex, profileType) id profile3.id fields profile3.getData
+      ElasticDsl.index into(defaultIndex, profileType) id profile3.id fields profile3.getData(forEs)
     }
+
+    // create course
+    val course1 = Course(id = "ielt1",title = "Ielt communication", teacher1 = profile1.id, days = "monday, tuesday", hours ="14h-16h",
+    price=23000000,room="room1")
+    val course2 = Course(id = "tofle",title = "Tofl communication", teacher1 = profile2.id, days = "monday, tuesday", hours ="14h-16h",
+      price=300000000,room="room1")
+    val course3 = Course(id = "tofx",title = "tofx communication", teacher1 = profile3.id, days = "monday, tuesday", hours ="14h-16h",
+      price=23000000,room="room1")
+    Courses.put(List(course1,course2,course3))
+
+    Elastic.esClient.sync.execute {
+      ElasticDsl.index into(defaultIndex, courseType) id course1.getId fields course1.getData(forEs)
+    }
+    Elastic.esClient.sync.execute {
+      ElasticDsl.index into(defaultIndex, courseType) id course2.getId fields course2.getData(forEs)
+    }
+    Elastic.esClient.sync.execute {
+      ElasticDsl.index into(defaultIndex, courseType) id course3.getId fields course3.getData(forEs)
+    }
+
+
+
+
+
+
+
+
+
+
 
 
   }

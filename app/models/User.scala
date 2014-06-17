@@ -5,6 +5,7 @@ import utils.Constant
 import javax.persistence.{Entity, Column, Id}
 import scala.annotation.meta.field
 
+import utils.Constant._
 /**
  * Created by Marco Chu on 5/15/14.
  */
@@ -18,7 +19,7 @@ case class User(
 
   def this() = this(null, null)
 
-  override def getData: Map[String, Any] = ???
+  override def getData(options : Int = forView): Map[String, Any] = ???
 }
 
 

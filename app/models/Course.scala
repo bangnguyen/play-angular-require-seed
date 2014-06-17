@@ -4,14 +4,18 @@ import utils.{Constant, Level}
 import utils.Level.Level
 import javax.persistence.{Entity, Column, Id}
 import scala.annotation.meta.field
+import utils.JsonHelper._
+import models.Course
+import utils.Constant._
+import models.Course
+import models.Course
 
 /**
  * Created by Marco Chu on 5/21/14.
  */
 
 @Entity
-case class Course(@(Id@field) @(Column@field) (name="key") id: String = UUID.randomUUID().toString ,
-                  @(Column@field)  code: String ="",
+case class Course(@(Id@field) @(Column@field)(name = "key")   id: String ="",
                   @(Column@field)  title: String ="",
                   @(Column@field)  level: Level = Level.Beginner,
                   @(Column@field)  isOpen : Boolean = true,
@@ -30,22 +34,21 @@ case class Course(@(Id@field) @(Column@field) (name="key") id: String = UUID.ran
 
   def this() = this(null)
   override def getId: String = id
-  override def getData: Map[String, Any] = Map(
-    "id" ->id ,
-    "code" -> code,
+  override def getData(option : Int = forView): Map[String, Any] = Map(
+    "id" -> id,
     "title" -> title,
     "level" -> level.toString,
     "teacher1" -> teacher1 ,
     "teacher2" -> teacher2 ,
     "comment" -> comment,
-    "start" ->start,
-    "finish" -> finish ,
+    "start" ->(if (option == forView)  start.getTime else start) ,
+    "finish" -> (if (option == forView)  finish.getTime else finish)  ,
     "isOpen" -> isOpen,
     "days" -> days,
     "hours" ->hours,
      "price" ->price,
     "discount" ->discount,
-  "room" -> room
+    "room" -> room
   )
 }
 object Courses extends CassandraDAO[Course, String](classOf[Course], Constant.defaultEntityManager)

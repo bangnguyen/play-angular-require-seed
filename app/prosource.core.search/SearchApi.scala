@@ -25,7 +25,7 @@ object SearchApi {
   }
 
 
-  def searchAllTeacher(): Map[String, Any] = {
+  def getAllTeachers(): Map[String, Any] = {
     val query = (
       ElasticDsl.search in defaultIndex types profileType
         query {
@@ -34,6 +34,24 @@ object SearchApi {
       )
     val response = esClient.sync.search(query)
 
+    println(ElasticDataHelper.getData(response).get("total").get)
+    ElasticDataHelper.getData(response)
+  }
+
+  def searchAllCourses(): Map[String, Any] = {
+    val query = ElasticDsl.search in defaultIndex types courseType
+    val response = esClient.sync.search(query)
+    println(ElasticDataHelper.getData(response).get("total").get)
+    ElasticDataHelper.getData(response)
+  }
+
+  def searchAllOpenCourses(): Map[String, Any] = {
+    val query = (ElasticDsl.search in defaultIndex types courseType
+      query {
+      matches("isOpen", true)
+    }
+      )
+    val response = esClient.sync.search(query)
     println(ElasticDataHelper.getData(response).get("total").get)
     ElasticDataHelper.getData(response)
   }

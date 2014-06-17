@@ -15,6 +15,9 @@ object Elastic {
   implicit val duration = Duration(10000, "millis")
   val defaultIndex = "prosource"
   val profileType = "profile"
+  val courseType = "course"
+
+
   val settings = ImmutableSettings.settingsBuilder()
     .put("http.enabled", false)
     .put("path.home",String.format(".%stmp%selastic%s",File.separator,File.separator,File.separator))

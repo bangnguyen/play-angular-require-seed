@@ -1,63 +1,179 @@
 <br/><br/><br/><br/>
 
-<form name="registerProfile">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="name">First Name</label>
-                <input type="text" class="form-control" data-ng-model="profile.firstName" placeholder="Name"
-                       required/><br/>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="name">Last Name</label>
-                <input type="text" class="form-control" data-ng-model="profile.lastName" placeholder="Name"
-                       required/><br/>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" data-ng-model="profile.phone" placeholder="Phone"
-                       required/><br/>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" data-ng-model="profile.email" placeholder="Email"
-                       required/><br/>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="phone">Address</label>
-                <input type="text" class="form-control" data-ng-model="profile.address" placeholder="Address"/><br/>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="birthday">Birthday</label>
+<div class="row">
+    <div id='information-profile' class="col-md-6">
 
-                <div>
-                    <p class="input-group">
-                        <input type="text" class="form-control" datepicker-popup="{{format}}"
-                               ng-model="profile.birthday" placeholder="Birthday" is-open="opened"
-                               datepicker-options="dateOptions"  close-text="Close"/>
+        <div>
+            <button ng-show="mode()=='view'" class="btn btn-primary" ng-click="edit(item)"> Edit</button>
+        </div>
+        <form name="registerProfile">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">First Name</label>
+                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                               data-ng-model="item.firstName" placeholder="Name"
+                               required/><br/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Last Name</label>
+                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                               data-ng-model="item.lastName" placeholder="Name"
+                               required/><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div ng-class="{'form-group has-error ' : errors.phone }">
+                        <label>Phone</label>
+                        <input ng-disabled="mode()=='view'" type="text" class="form-control" data-ng-model="item.phone"
+                               placeholder="Phone"
+                               required/><br/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div ng-class="{'form-group has-error ' : errors.email}">
+                        <label for="email">Email</label>
+                        <input ng-disabled="mode()=='view'" type="email" class="form-control" data-ng-model="item.email"
+                               placeholder="Email"
+                               required/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                               data-ng-model="item.address" placeholder="Address"/><br/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+
+                        <div>
+                            <p class="input-group">
+                                <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                                       datepicker-popup="{{format}}"
+                                       ng-model="item.birthday" placeholder="Birthday" is-open="opened"
+                                       datepicker-options="dateOptions" close-text="Close"/>
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)"><i
                             class="glyphicon glyphicon-calendar"></i></button>
                   </span>
-                    </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Position</label>
+                        <select ng-disabled="mode()=='view'" class="form-control" ng-model="item.position"
+                                ng-options="position as position for position in positions"></select>
+                    </div>
+                </div>
+            </div>
+
+            <button ng-show="mode() == 'edit'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
+                    data-ng-click="update(item)">Save
+            </button>
+            <button ng-show="mode() == 'create'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
+                    data-ng-click="create(item)">Create
+            </button>
+        </form>
+
+    </div>
+
+    <div id='information-profile-courses' class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Courses subscription</label>
+                    <ul>
+                        <li ng-repeat="c in item.courses">
+                            <a ng-click="editCourse(c)">{{c.id}}</a> <a ng-click="item.courses.splice($index,1)">&nbsp
+                            Remove</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Courses Available</label>
+                    <ul>
+                        <li ng-repeat="c in allcourses">
+                            <a href="#/courses/{{c.id}}/view"> {{c.id}} &nbsp {{c.title}}</a><a
+                                ng-click="addCourse(c) ">&nbspAdd</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <button class="btn btn-primary" data-ng-disabled="registerForm.$invalid" data-ng-click="create(profile)">Create</button>
 
-</form>
+        <div >
+            <label>Information Course Subscription </label>
+            <br><br>
+
+            <form name="registerCourse">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tuition Fee </label>
+                            <input type="number" class="form-control" ng-model="course.tuitionFee"
+                                   placeholder="Tuition Fee"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label> isPaid </label>
+                            <input type="checkbox" ng-model="course.isTuitionFeePaid"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Book Fee </label>
+                            <input type="number" class="form-control" ng-model="course.bookFee" placeholder="Book Fee"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                isPaid
+                            </label>
+                            <input type="checkbox" ng-model="course.isBookFeePaid"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label> Sale Id</label>
+                            <input type="text" class="form-control" ng-model="course.salesStaffId"
+                                   placeholder="Sale Id"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Consultant Id</label>
+                            <input type="text" class="form-control" ng-model="course.consultantId"
+                                   placeholder="ConsultantId"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

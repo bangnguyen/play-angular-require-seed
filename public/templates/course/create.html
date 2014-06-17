@@ -6,7 +6,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Code</label>
-                            <input type="text" class="form-control" data-ng-model="item.code" placeholder="Code"
+                            <input  ng-class="{'form-group has-error ' : errors.code }" type="text" class="form-control" data-ng-model="item.id" placeholder="Code"
                                    required/>
                         </div>
                     </div>
@@ -23,15 +23,13 @@
                         <div class="form-group">
                             <label class="control-label">Level</label>
                             <select class="form-control" ng-model="item.level"
-                                    ng-options="level as level for level in levels"></select>
+                                    ng-options="level as level for level in levels" required></select>
                         </div>
-
-
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Teacher</label>
-                            <select class="form-control" required ng-model="item.teacher"
+                            <select class="form-control" required ng-model="item.teacher1"
                                     ng-options="teacher.id as teacher.fullName for teacher in  teachers"></select>
                         </div>
                     </div>
@@ -82,16 +80,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Price</label>
-
-                            <div class="input-group"><input type="text" class="form-control" data-ng-model="item.price"
-                                                            placeholder="Price"
-                                                            required/><span class="input-group-addon">VND</span></div>
+                            <div class="input-group">
+                         <input type="number" class="form-control" data-ng-model="item.price" placeholder="Price"
+                                                            required/>
+                                <span class="input-group-addon">VND</span></div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Discount</label>
-                            <input type="text" class="form-control" ng-model="item.discount" placeholder="Discount"
+                            <input type="text"  class="form-control" ng-model="item.discount" placeholder="Discount"
                                    required/>
                         </div>
                     </div>

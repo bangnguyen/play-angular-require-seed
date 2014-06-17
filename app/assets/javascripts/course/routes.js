@@ -6,7 +6,9 @@ define(["angular", "./controllers", "common"], function(angular, controllers) {
     mod.config(["$routeProvider", function($routeProvider) {
         $routeProvider
             .when("/createCourse", {templateUrl:"/assets/templates/course/create.html", controller:controllers.CourseCtrl})
-            .when("/courses", {templateUrl:"/assets/templates/course/list.html", controller:controllers.CourseCtrl});
+            .when("/courses", {templateUrl:"/assets/templates/course/list.html", controller:controllers.CourseCtrl})
+            .when("/courses/:id/edit", {templateUrl:"/assets/templates/course/list.html", controller:controllers.CourseCtrl})
+            .when("/courses/:id/view", {templateUrl:"/assets/templates/course/list.html", controller:controllers.CourseCtrl})
     }]);
     return mod;
 });

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 
 
 trait JsonHelper {
+
   import scala.language.postfixOps
 
   val updateReads = (
@@ -55,7 +56,7 @@ trait JsonHelper {
       (__ \ 'ids).readNullable[List[String]]
     ) tupled
 
-  implicit def listTupleReads : Reads[List[(String, Double)]] = new Reads[List[(String, Double)]] {
+  implicit def listTupleReads: Reads[List[(String, Double)]] = new Reads[List[(String, Double)]] {
     def reads(json: JsValue) = json match {
       case JsArray(ts) => {
         var hasErrors = false
@@ -66,13 +67,21 @@ trait JsonHelper {
               case (JsSuccess(id, _), JsSuccess(weight, _)) => Right((id, weight))
               case (JsError(id), JsSuccess(weight, _)) =>
                 hasErrors = true
-                Left(id.map { case (p, valerr) => (JsPath(idx)) ++ p -> valerr })
+                Left(id.map {
+                  case (p, valerr) => (JsPath(idx)) ++ p -> valerr
+                })
               case (JsSuccess(id, _), JsError(weight)) =>
                 hasErrors = true
-                Left(weight.map { case (p, valerr) => (JsPath(idx)) ++ p -> valerr })
+                Left(weight.map {
+                  case (p, valerr) => (JsPath(idx)) ++ p -> valerr
+                })
               case (JsError(id), JsError(weight)) =>
                 hasErrors = true
-                Left(id.map { case (p, valerr) => (JsPath(idx)) ++ p -> valerr } ++ weight.map { case (p, valerr) => (JsPath(idx)) ++ p -> valerr })
+                Left(id.map {
+                  case (p, valerr) => (JsPath(idx)) ++ p -> valerr
+                } ++ weight.map {
+                  case (p, valerr) => (JsPath(idx)) ++ p -> valerr
+                })
             }
           }
         }
@@ -102,7 +111,7 @@ object JsonHelper extends JsonHelper {
       result = JsNull
     } else {
       if (value.isInstanceOf[BaseEntity]) {
-        result = mapToJson(value.asInstanceOf[BaseEntity].getData)
+        result = mapToJson(value.asInstanceOf[BaseEntity].getData())
       } else if (value.isInstanceOf[JsValue]) {
         result = value.asInstanceOf[JsValue]
       }
@@ -158,11 +167,23 @@ object JsonHelper extends JsonHelper {
   }
 
 
-
   def listToJson(list: List[Any]): JsValue = {
-    JsArray(list.foldLeft(List[JsValue]())((r,e)=>r.::(anyToJson((e)))))
+    JsArray(list.foldLeft(List[JsValue]())((r, e) => r.::(anyToJson((e)))))
   }
 
+  def errorsToJson(errors: Seq[(JsPath, Seq[ValidationError])]) : JsValue = {
+    var globalMessage = ""
+    var results = errors.foldLeft(Map[String, Any]())((r, u) => {
+      val m = u._2.foldLeft(List[String]())((r1, u1) => {
+        globalMessage +=  u1.message + "<br/>"
+        r1.::(u1.message)
+      })
+      r.+(u._1.toString().replace("/", "") -> m)
+    }
+    )
+    results += ("all" -> globalMessage)
+    mapToJson(results)
+  }
 
 
 }

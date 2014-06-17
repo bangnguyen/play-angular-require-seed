@@ -13,6 +13,8 @@ object Constant {
   val CASSANDRA_CQL_VERSION: String = "cassandra.cql.version"
   val defaultEntityManager = "default"
   val compositeEntityManager = "composite"
+  val forEs = 2
+  val forView = 1
 
 }
 
@@ -28,7 +30,7 @@ object FuncResult {
 
 object Position extends Enumeration {
   type Position = Value
-  val Teacher, Student, Management = Value
+  val Teacher, Student, Management, Other = Value
 }
 
 object Level extends Enumeration {

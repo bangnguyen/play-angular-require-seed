@@ -16,9 +16,18 @@ object Search  extends Controller {
       Ok(mapToJson(SearchApi.search(keyword, page, pageSize,profileType)))
   }
 
-  def getAllTeacher() = Action {
+  def getAllTeachers() = Action {
     implicit rs =>
-      Ok(mapToJson(SearchApi.searchAllTeacher()))
+      Ok(mapToJson(SearchApi.getAllTeachers()))
+  }
+  def searchAllCourses() = Action {
+    implicit rs =>
+      Ok(mapToJson(SearchApi.searchAllCourses()))
+  }
+
+  def searchAllOpenCourses() = Action {
+    implicit rs =>
+      Ok(mapToJson(SearchApi.searchAllOpenCourses()))
   }
 
 }
