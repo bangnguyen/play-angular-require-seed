@@ -1,179 +1,175 @@
-<br/><br/><br/><br/>
 
 <div class="row">
-    <div id='information-profile' class="col-md-6">
+    <div class="col-md-8">
+        <div class="row profile-form">
+            <ul class="nav nav-tabs col-md-12">
+                <li class="active"><a href="#information-profile" data-toggle="tab">Profile information</a></li>
+                <li><a href="#information-profile-courses" data-toggle="tab">Courses</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content col-md-12">
+                <div id='information-profile' class="tab-pane active">
+                    <form name="registerProfile">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">First Name</label>
+                                    <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                                           data-ng-model="item.firstName" placeholder="First Name"
+                                           required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Last Name</label>
+                                    <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                                           data-ng-model="item.lastName" placeholder="Last Name"
+                                           required/>
+                                </div>
+                            </div>
+                        </div><!--First name and last name-->
 
-        <div>
-            <button ng-show="mode()=='view'" class="btn btn-primary" ng-click="edit(item)"> Edit</button>
-        </div>
-        <form name="registerProfile">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name">First Name</label>
-                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
-                               data-ng-model="item.firstName" placeholder="Name"
-                               required/><br/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name">Last Name</label>
-                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
-                               data-ng-model="item.lastName" placeholder="Name"
-                               required/><br/>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div ng-class="{'form-group has-error ' : errors.phone }">
-                        <label>Phone</label>
-                        <input ng-disabled="mode()=='view'" type="text" class="form-control" data-ng-model="item.phone"
-                               placeholder="Phone"
-                               required/><br/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div ng-class="{'form-group has-error ' : errors.email}">
-                        <label for="email">Email</label>
-                        <input ng-disabled="mode()=='view'" type="email" class="form-control" data-ng-model="item.email"
-                               placeholder="Email"
-                               required/>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Address</label>
-                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
-                               data-ng-model="item.address" placeholder="Address"/><br/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="birthday">Birthday</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="birthday">Birthday</label>
+                                    <div class="input-group">
+                                        <input ng-disabled="mode()=='view'" type="text" class="form-control"
+                                               datepicker-popup="{{format}}"
+                                               ng-model="item.birthday" placeholder="Birthday" is-open="opened"
+                                               datepicker-options="dateOptions" close-text="Close"/>
+                        <span type="button" class="input-group-addon button" ng-click="open($event,0)"><i
+                                class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div>
-                            <p class="input-group">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Position</label>
+                                    <select ng-disabled="mode()=='view'" class="form-control" ng-model="item.position"
+                                            ng-options="position as position for position in positions"></select>
+                                </div>
+                            </div>
+                        </div><!--Birthday and Position-->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ng-class="{'form-group has-error ' : errors.phone }">
+                                    <label>Phone</label>
+                                    <input ng-disabled="mode()=='view'" type="text" class="form-control" data-ng-model="item.phone"
+                                           placeholder="Phone"
+                                           required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div ng-class="{'form-group has-error ' : errors.email}">
+                                    <label for="email">Email</label>
+                                    <input ng-disabled="mode()=='view'" type="email" class="form-control" data-ng-model="item.email"
+                                           placeholder="Email"
+                                           required/>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div><!--Email and phone number-->
+
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Address</label>
                                 <input ng-disabled="mode()=='view'" type="text" class="form-control"
-                                       datepicker-popup="{{format}}"
-                                       ng-model="item.birthday" placeholder="Birthday" is-open="opened"
-                                       datepicker-options="dateOptions" close-text="Close"/>
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                            class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                            </p>
+                                       data-ng-model="item.address" placeholder="Address"/>
+                            </div>
+                        </div><!--Address-->
+
+                        <div ng-show="mode()=='view'">
+                            <button type="button" class="btn btn-info" ng-click="edit(item)">Edit </button> this profile information
+                        </div>
+                    </form>
+                </div>
+
+                <div id='information-profile-courses' class="tab-pane">
+                    <div class="row">
+                        <div class="col-md-6 profile-courses">
+                            <div class="form-group">
+                                <label>Courses Available</label>
+                                <ul class="list-group">
+                                    <li ng-repeat="c in allcourses" class="courseItem">
+                                        <a href="#/courses/{{c.id}}/view"> {{c.id}}&nbsp{{c.title}}</a>&nbsp<a class="btn btn-default btn-xs"
+                                                                                                               ng-click="addCourse(c) ">Add</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 profile-courses">
+                            <div class="form-group">
+                                <label>Courses subscription</label>
+                                <ul class="list-group">
+                                    <li ng-repeat="c in item.courses" class="coursesItem">
+                                        <a ng-click="editCourse(c)">{{c.id}}</a>&nbsp<a ng-click="item.courses.splice($index,1)" class="btn btn-success btn-xs">Remove</a>
+                                    </li>
+                                </ul>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Position</label>
-                        <select ng-disabled="mode()=='view'" class="form-control" ng-model="item.position"
-                                ng-options="position as position for position in positions"></select>
+                    <div>
+                        <h3>Information Course Subscription </h3>
+
+                        <form name="registerCourse">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tuition Fee </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" ng-model="course.bookFee" placeholder="Book Fee"/>
+                                            <span class="input-group-addon course-form-checkbox"><span class="checkbox"><input type="checkbox" ng-model="course.isTuitionFeePaid"/>  isPaid</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Book Fee </label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" ng-model="course.bookFee" placeholder="Book Fee"/>
+                                                <span class="input-group-addon course-form-checkbox"><span class="checkbox"><input type="checkbox" ng-model="course.isBookFeePaid"/>  isPaid</span></span>
+                                            </div>
+                                    </div>
+                                </div>
+
+                            </div><!--Book Fee-->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Sale Id</label>
+                                        <input type="text" class="form-control" ng-model="course.salesStaffId"
+                                               placeholder="Sale Id"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Consultant Id</label>
+                                        <input type="text" class="form-control" ng-model="course.consultantId"
+                                               placeholder="ConsultantId"/>
+                                    </div>
+                                </div>
+                            </div><!--Sale Id and Consultant Id-->
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <button ng-show="mode() == 'edit'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
-                    data-ng-click="update(item)">Save
-            </button>
-            <button ng-show="mode() == 'create'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
-                    data-ng-click="create(item)">Create
-            </button>
-        </form>
-
+            <div class="col-md-12">
+                <button ng-show="mode() == 'edit'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
+                        data-ng-click="update(item)">Save
+                </button>
+                <button ng-show="mode() == 'create'" class="btn btn-primary" data-ng-disabled="registerForm.$invalid"
+                        data-ng-click="create(item)">Create
+                </button>
+            </div>
+        </div>
     </div>
+    <div class="col-md-4 ads-hide">
 
-    <div id='information-profile-courses' class="col-md-6">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Courses subscription</label>
-                    <ul>
-                        <li ng-repeat="c in item.courses">
-                            <a ng-click="editCourse(c)">{{c.id}}</a> <a ng-click="item.courses.splice($index,1)">&nbsp
-                            Remove</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Courses Available</label>
-                    <ul>
-                        <li ng-repeat="c in allcourses">
-                            <a href="#/courses/{{c.id}}/view"> {{c.id}} &nbsp {{c.title}}</a><a
-                                ng-click="addCourse(c) ">&nbspAdd</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div >
-            <label>Information Course Subscription </label>
-            <br><br>
-
-            <form name="registerCourse">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Tuition Fee </label>
-                            <input type="number" class="form-control" ng-model="course.tuitionFee"
-                                   placeholder="Tuition Fee"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label> isPaid </label>
-                            <input type="checkbox" ng-model="course.isTuitionFeePaid"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Book Fee </label>
-                            <input type="number" class="form-control" ng-model="course.bookFee" placeholder="Book Fee"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>
-                                isPaid
-                            </label>
-                            <input type="checkbox" ng-model="course.isBookFeePaid"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label> Sale Id</label>
-                            <input type="text" class="form-control" ng-model="course.salesStaffId"
-                                   placeholder="Sale Id"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Consultant Id</label>
-                            <input type="text" class="form-control" ng-model="course.consultantId"
-                                   placeholder="ConsultantId"/>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 </div>

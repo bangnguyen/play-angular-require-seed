@@ -1,23 +1,7 @@
-.gridStyle {
-    border: 1px solid rgb(212,212,212);
-    width: 500px;
-    height: 300px;
-}
 
 
-/*.info-bar {
-    position: absolute;
-    top : 30px;
-    text-align: center;
-    width:100%;
-    z-index: 1000;
-}*/
-
-.inform-bar-content {
-    padding: 5px;
-    color: #fff;
-    text-align:center;
-}
+.gridStyle {border: 1px solid rgb(212,212,212); width: 500px;height: 300px;}
+.inform-bar-content {padding: 5px;color: #fff;text-align:center;}
 .inform-bar-content p{font-size: 25px;}
 /*hide class*/
 .ads-hide{visibility: hidden;}
@@ -33,6 +17,11 @@ nav.navbar ul li.open>a,
 nav.navbar ul li.open>a:hover,
 nav.navbar ul li.open>a:focus{background-color: transparent;}
 /*form course create*/
-.course-create form {
-    padding-bottom: 30px;
-}
+.course-create form {padding-bottom: 30px;}
+/*form profile create*/
+.profile-courses { min-height: 150px;}
+ul .courseItem {margin: 7px 0 3px; list-style: none;}
+.profile-form ul.nav-tabs { margin-bottom: 25px;}
+.course-form-checkbox {padding-bottom: 0;background: none;}
+.course-form-checkbox span.checkbox {margin-top: 0;margin-bottom: 0;}
+.course-form-checkbox span.checkbox input {margin-top: 2px;}
